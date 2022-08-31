@@ -1,0 +1,76 @@
+import './App.scss';
+import { auth, firestore } from './FireBase/utils';
+import { useState } from 'react';
+
+import Homepage from './Pages/Homepage';
+import SignIn from './Pages/SignIn';
+export let activeUser;
+
+const App = () => {
+  const [isUserSignedIn, setIsUserSignedIn] = useState(null)
+
+
+  auth.onAuthStateChanged((authUser) => {
+    activeUser = authUser;
+    // console.log(activeUser.uid)
+    if(authUser){
+      firestore.collection(activeUser.uid).doc("personalInfo").set({
+        name: activeUser.displayName,
+        email: activeUser.email,
+        uid: activeUser.uid,
+        balance: 99999
+      })
+      return setIsUserSignedIn(true)
+    }
+    else{
+      return setIsUserSignedIn(null)
+    }
+  })
+  return
+    if(screen.width>559 && screen.height>643){
+      isUserSignedIn ? (
+          <>
+            <div className="App">
+              <div className="main">
+                <Homepage/>
+              </div>
+            </div>
+          </>
+        ): (
+          <>
+            <div className="App">
+              <div className="main">
+                <SignIn/>
+              </div>
+            </div>
+          </>
+        )
+    }
+    else{
+      (
+        <div className='unsupportedDevice'>
+          <h1>Site is not optimized for your device</h1>
+        </div>
+      )
+    }
+  
+  // return isUserSignedIn ? (
+  //   <>
+  //     <div className="App">
+  //       <div className="main">
+  //         <Homepage/>
+  //       </div>
+  //     </div>
+  //   </>
+  // ): (
+  //   <>
+  //     <div className="App">
+  //       <div className="main">
+  //         <SignIn/>
+  //       </div>
+  //     </div>
+  //   </>
+  // )
+}
+
+export default App;

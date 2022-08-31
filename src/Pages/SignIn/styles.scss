@@ -1,0 +1,31 @@
+.signInPage{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 27rem;
+
+    .main-head{
+        height: 4rem;
+        width: 31rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #fff;
+        padding-bottom: 10px;
+    }
+
+    .googleLogo img{
+        height: 17rem;
+        width: 17rem;
+        filter: invert(100%);
+    }
+    button{
+        height: 3rem;
+        width: 15rem;
+        color: #fff;
+        border: 2px solid #fff;
+        cursor: pointer;   
+        border-radius: 5px;
+    }
+}

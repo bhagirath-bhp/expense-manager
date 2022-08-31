@@ -1,0 +1,222 @@
+import React from 'react'
+import { firestore } from '../../FireBase/utils'
+import {activeUser} from '../../App'
+import './styles.scss'
+import { useState, useEffect } from 'react'
+
+
+export function TransactionCollection(){
+    let [transaction, setTransaction] = useState({name:null, amount:0, tid:null, times:1});
+    let transactionArray = [];
+    useEffect(() => {
+        console.log("changed");
+    }, [transaction])
+    firestore.collection(activeUser.uid).get().then(snapshot => {
+        //used for loop instead of forEach
+        // let i = 0;
+        // for(let doc of snapshot.docs){
+        //     if(doc.data().tid){
+        //         transaction.name = doc.data().name
+        //         transaction.amount = doc.data().amount
+        //         transaction.tid = doc.data().tid
+        //         transaction.times = doc.data().times
+        //         transactionArray.push(<Transactions name={transaction.name} amount={transaction.amount} tid={transaction.tid} times={transaction.times} key={i}/>)
+        //         i = i + 1;
+        //         console.log(i);
+        //     }
+        // }
+        
+        snapshot.docs.forEach(doc => {
+            if(doc.data().tid){
+                // setTransaction({name:doc.data().name, amount:doc.data().amount, tid:doc.data().tid})
+                setTransaction({name:doc.data().name, amount:doc.data().amount, tid:doc.data().tid, times:doc.data().times})
+                // console.log(transaction);
+                transactionArray.push(<Transactions name={transaction.name} amount={transaction.amount} tid={transaction.tid} times={transaction.times}/>) 
+            }
+            // console.log(doc.data());
+            // console.log(activeUser.photoURL);
+        })
+
+        // for(let doc of snapshot.docs){
+        //     if(doc.data().tid){
+        //         transaction.name = doc.data().name
+        //         transaction.amount = doc.data().amount
+        //         transaction.tid = doc.data().tid
+        //         transaction.times = doc.data().times
+        //         transactionArray.push(<Transactions name={transaction.name} amount={transaction.amount} tid={transaction.tid} times={transaction.times}/>)
+        //         transactionArray.map(trans => {
+        //             console.log(trans.name);
+        //             return(
+        //                 <>
+        //                     <Transactions name={trans.name} amount={trans.amount} tid={trans.tid} times={trans.times}/>
+        //                 </>
+        //             )
+        //         })
+        //     }
+        // }
+        // return (<>{transactionArray.map()}</>);
+    })
+    // return (<><Transactions name="bcd" amount={99} tid="shagygdadb" times={3}/></>);
+    // console.log(transactionArray);
+    return(<>{transactionArray}</>)
+}
+
+
+export function TransactionCollection(){
+    let [transaction, setTransaction] = useState({name:null, amount:0, tid:null, times:1});
+    let transactionArray = [];
+    useEffect(() => {
+        console.log("changed");
+        firestore.collection(activeUser.uid).get().then(snapshot => {        
+            snapshot.docs.forEach(doc => {
+                if(doc.data().tid){
+                    setTransaction({name:doc.data().name, amount:doc.data().amount, tid:doc.data().tid, times:doc.data().times})
+                    // console.log(transaction);
+                    transactionArray.push(transaction) 
+                }
+            })
+        })
+    }, [])
+    // console.log(activeUser.photoURL)
+    console.log(transactionArray)
+    return(<>{transactionArray}</>)
+}
+
+
+
+function Transactions(props) {
+  return (
+    <div>
+        <div className='transactions-list'>
+            <div className="transaction-info">
+                <div className="transaction-logo"></div>
+                <div className="transaction-details">
+                    <h3>{props.name}</h3>
+                    <p>{props.date}<span>{"₹"+props.amount}</span></p>
+                </div>
+            </div>
+            <div className="reTransact">
+                <button className="AddTransact">+</button>
+                <h3>{props.times}</h3>
+                <button className="SubtractTransact">-</button>
+            </div>
+            <div className="transaction-amount">
+                <b>{"₹"+props.times*props.amount}</b>
+            </div>
+        </div>
+    </div>      
+  )
+}
+
+export default Transactions
+
+
+
+============================================================================================================================================================
+============================================================================================================================================================
+
+
+
+
+
+import React from 'react'
+import { firestore } from '../../FireBase/utils'
+import {activeUser} from '../../App'
+import './styles.scss'
+// import { useState, useEffect } from 'react'
+
+
+let transactionArray = [];
+export function TransactionCollection(){
+    // let [transaction, setTransaction] = useState({name:null, amount:0, tid:null, times:1});
+    let index = 0;
+    firestore.collection(activeUser.uid).get().then(snapshot => {       
+        snapshot.docs.forEach(doc => {
+            if(doc.data().tid){
+                // console.log(transaction);
+                transactionArray.push({index: index, name:doc.data().name, amount:doc.data().amount, tid:doc.data().tid, times:doc.data().times}) 
+                index++;
+            }
+        })
+    })
+    // console.log(activeUser.photoURL)
+
+
+
+    console.log("25",transactionArray)
+    for(let i of transactionArray){
+        console.log(i);
+    }
+    console.log("29",transactionArray)
+    transactionArray.forEach(item => {console.log(item)})
+
+
+
+
+    return(<>{transactionArray.forEach(item => {
+        <div className='transactions-list' key={item.index}>
+            <div className="transaction-info">
+                <div className="transaction-logo"></div>
+                <div className="transaction-details">
+                    <h3>{item.name}</h3>
+                    <p>{item.date}<span>{"₹"+item.amount}</span></p>
+                </div>
+            </div>
+            <div className="reTransact">
+                <button className="AddTransact">+</button>
+                <h3>{item.times}</h3>
+                <button className="SubtractTransact">-</button>
+            </div>
+            <div className="transaction-amount">
+                <b>{"₹"+item.times*item.amount}</b>
+            </div>
+        </div>
+    })}</>)
+}
+
+
+function Transactions() {
+  return (
+    <div>
+        {/* {transactionArray.map(item => {(
+            <div className='transactions-list' key={item.index}>
+                <div className="transaction-info">
+                    <div className="transaction-logo"></div>
+                    <div className="transaction-details">
+                        <h3>{item.name}</h3>
+                        <p>{item.date}<span>{"₹"+item.amount}</span></p>
+                    </div>
+                </div>
+                <div className="reTransact">
+                    <button className="AddTransact">+</button>
+                    <h3>{item.times}</h3>
+                    <button className="SubtractTransact">-</button>
+                </div>
+                <div className="transaction-amount">
+                    <b>{"₹"+item.times*item.amount}</b>
+                </div>
+            </div>
+            
+        )})} */}
+        {/* <div className='transactions-list'>
+            <div className="transaction-info">
+                <div className="transaction-logo"></div>
+                <div className="transaction-details">
+                    <h3>{props.name}</h3>
+                    <p>{props.date}<span>{"₹"+props.amount}</span></p>
+                </div>
+            </div>
+            <div className="reTransact">
+                <button className="AddTransact">+</button>
+                <h3>{props.times}</h3>
+                <button className="SubtractTransact">-</button>
+            </div>
+            <div className="transaction-amount">
+                <b>{"₹"+props.times*props.amount}</b>
+            </div>
+        </div> */}
+    </div>      
+  )
+}
+
+export default Transactions

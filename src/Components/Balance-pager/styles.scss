@@ -1,0 +1,51 @@
+.container{
+    width: 30rem;
+    height: 14rem;
+    // height: 100%;
+    box-shadow: 0 0 20px 1px #333 inset;
+    border-radius: 20px;
+    margin: 1rem auto;
+    input{
+        height: 20px;
+        font-size: 0.8rem;
+        border: 1px solid #fff;
+        padding-left: 10px;
+        border-radius: 30px;
+        color: #fff;
+        margin: auto 50%;
+        transform: translate(-50%, 200%);
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
+        -webkit-transform: translate(-50%, 200%);
+        -moz-transform: translate(-50%, 200%);
+        -ms-transform: translate(-50%, 200%);
+        -o-transform: translate(-50%, 200%);
+}
+}
+.editBalance{
+    float: right;
+    cursor: pointer;
+}
+.blcontainer{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    h3{
+        margin: 0;
+        padding: 0;
+    }
+    p{
+        font-size: 4.5rem;
+        margin: 0;
+        padding: 0;
+
+        span{
+            font-size: 3rem;
+        }
+    }
+}

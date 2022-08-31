@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Quicksand&display=swap');
+
+*{
+  background-color: #070707;
+}
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff;
+  font-family: 'Quicksand', sans-serif;
+
+  .main{
+    height: 80vh;
+    width: 500px;
+    box-shadow: 0 0 30px 0 #353535;
+    border-radius: 20px;
+    padding: 20px;
+  }
+}
+
+$breakpoint-tablet: 554px;
+@media (max-width: $breakpoint-tablet) {
+  .main{
+    transform: scaleX(0.9);
+  }
+}
+$breakpoint-mobile: 488px;
+@media (max-width: $breakpoint-mobile){
+  .main{
+    transform: scaleX(0.8);
+    // transform: scaleY(0.9);
+  }
+}
+$breakpoint-mini-mobile: 430px;
+@media (max-width: $breakpoint-mini-mobile){
+  .main{
+    transform: scaleX(0.7);
+    // transform: scaleY(0.99);
+  }
+}
+$breakpoint-mini-mobile: 360px;
+@media (max-width: $breakpoint-mini-mobile){
+  .main{
+    transform: scaleX(0.6);
+    // transform: scaleY(0.99);
+  }
+}

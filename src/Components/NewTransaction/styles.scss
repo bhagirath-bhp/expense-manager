@@ -1,0 +1,82 @@
+.createTransaction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    height: 33rem;
+    box-shadow: 0 0 10px 0 #555;
+    border-radius: 2rem;
+    margin: 0 auto;
+    transition: 0.7s;
+    overflow: hidden;
+
+    input{
+        border: 0.1rem solid #fff;
+        color: #fff;
+        outline: none;
+        height: 2rem;
+        width: 25rem;
+        padding: 0 0.5rem;
+        // margin: 1rem 0;
+        // border-radius: 0.5rem;
+    }
+    select{
+        border: 0.1rem solid #fff;
+        height: 2.5rem;
+        width: 26rem;
+        color: #fff;
+    }
+    .transactionTiming{
+        margin: 2rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            div{
+                height: 2rem;
+                border: 0.1px solid #fff;
+                text-align: center;
+                line-height: 2rem;
+                margin: 0 1rem;
+                padding: 0 2rem;
+            }
+        }
+    }
+    .submit-new-transaction{
+        input{
+            border-radius: 2px;
+            font-size: 1.2rem;
+        }
+    }
+
+
+}
+.newTransaction{
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+    background: #070707;
+    color: #fff;
+    box-shadow: 0 0 10px 5px #353535;
+    font-size: 3rem;
+    font-weight: 100;
+    position: sticky;
+    z-index: 99;
+    right: 20px;
+    bottom: 30px;
+    float: right;
+    margin: 0 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.newTransaction:hover{
+    box-shadow: 0 0 10px 5px #7a7a7a;
+}
+.newTransaction:active{
+    transform: scale(0.9);
+}
